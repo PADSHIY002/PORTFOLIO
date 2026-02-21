@@ -1041,4 +1041,171 @@ if (document.readyState === 'loading') {
 // Smooth scroll is handled natively by CSS scroll-behavior: smooth
 
 
+// Portfolio Modal Functionality
+const portfolioProjects = [
+    {
+        title: "Project One",
+        description: "A modern web application with stunning UI/UX design. Built with React and featuring responsive layout, smooth animations, and intuitive user interactions.",
+        tags: ["React", "CSS", "JavaScript", "API"],
+        demo: "#",
+        source: "#"
+    },
+    {
+        title: "Project Two",
+        description: "Brand identity and digital presence for innovative startup. Complete website redesign with modern aesthetics and user-focused design.",
+        tags: ["HTML", "CSS", "JavaScript", "Figma"],
+        demo: "#",
+        source: "#"
+    },
+    {
+        title: "Project Three",
+        description: "E-commerce platform with seamless user experience. Features include shopping cart, payment integration, and admin dashboard.",
+        tags: ["React", "Node.js", "MongoDB", "Stripe"],
+        demo: "#",
+        source: "#"
+    },
+    {
+        title: "Project Four",
+        description: "Mobile app design with intuitive navigation. Focus on user experience and accessibility across all devices.",
+        tags: ["React Native", "Figma", "UX/UI"],
+        demo: "#",
+        source: "#"
+    },
+    {
+        title: "Project Five",
+        description: "Creative agency website with interactive elements. Dynamic animations and modern visual effects.",
+        tags: ["HTML", "CSS", "GSAP", "JavaScript"],
+        demo: "#",
+        source: "#"
+    },
+    {
+        title: "Project Six",
+        description: "Dashboard design with data visualization. Interactive charts and real-time data updates.",
+        tags: ["React", "D3.js", "Chart.js", "API"],
+        demo: "#",
+        source: "#"
+    }
+];
+
+// Initialize modal functionality
+function initPortfolioModal() {
+    const modal = document.getElementById('portfolioModal');
+    const modalTitle = modal.querySelector('.modal-title');
+    const modalDesc = modal.querySelector('.modal-description');
+    const modalTags = modal.querySelector('.modal-tags');
+    const modalDemo = modal.querySelector('.modal-link.primary');
+    const modalSource = modal.querySelector('.modal-link.secondary');
+    const closeBtn = modal.querySelector('.modal-close');
+    
+    // Add click handlers to portfolio cards
+    const portfolioCards = document.querySelectorAll('.portfolio-card');
+    
+    portfolioCards.forEach((card, index) => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', (e) => {
+            // Prevent opening modal when clicking on the link
+            if (e.target.classList.contains('card-link')) {
+                return;
+            }
+            
+            const project = portfolioProjects[index];
+            if (project) {
+                // Update modal content
+                modalTitle.textContent = project.title;
+                modalDesc.textContent = project.description;
+                
+                // Update tags
+                modalTags.innerHTML = project.tags
+                    .map(tag => `<span class="modal-tag">${tag}</span>`)
+                    .join('');
+                
+                // Update links
+                modalDemo.href = project.demo;
+                modalSource.href = project.source;
+                
+                // Show modal
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+    
+    // Close modal on button click
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Close modal on overlay click
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+    
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Contact Form Functionality
+function initContactForm() {
+    const form = document.getElementById('contactForm');
+    
+    if (!form) return;
+    
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            subject: formData.get('subject'),
+            message: formData.get('message')
+        };
+        
+        // Create mailto link
+        const mailtoLink = `mailto:krutiyaly@mail.ru?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`Name: ${data.name}\nEmail: ${data.email}\n\nMessage:\n${data.message}`)}`;
+        
+        // Open email client
+        window.location.href = mailtoLink;
+        
+        // Show success message
+        alert('Thank you for your message! Your email client will open to send the message.');
+        
+        // Reset form
+        form.reset();
+    });
+}
+
+// Download Resume functionality
+function initResumeDownload() {
+    const downloadBtn = document.getElementById('downloadResume');
+    
+    if (!downloadBtn) return;
+    
+    downloadBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        
+        // Show message that resume will be available soon
+        // In a real scenario, this would link to an actual PDF file
+        alert('Resume download feature will be available soon! Please contact me via email for the full resume.');
+    });
+}
+
+// Initialize new features
+document.addEventListener('DOMContentLoaded', () => {
+    initPortfolioModal();
+    initContactForm();
+    initResumeDownload();
+});
+
+
 // loader
