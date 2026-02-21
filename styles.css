@@ -1373,6 +1373,17 @@ section {
     height: auto;
 }
 
+.cert-modal-content {
+        max-width: 900px;
+    }
+.cert-modal-img {
+        width: 100%;
+        max-height: 500px;
+        object-fit: contain;
+        border-radius: 24px 24px 0 0;
+        background: var(--burgundy-dark);
+}
+
 .certification-content {
     padding: 2rem;
     text-align: center;
