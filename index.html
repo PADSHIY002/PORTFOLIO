@@ -43,7 +43,18 @@
     <meta name="twitter:description" content="Front-end Developer specializing in HTML, CSS, JavaScript, React">
 
 
-</head>
+<style>
+    .cert-modal-content {
+        max-width: 900px;
+    }
+    .cert-modal-img {
+        width: 100%;
+        max-height: 500px;
+        object-fit: contain;
+        border-radius: 24px 24px 0 0;
+        background: var(--burgundy-dark);
+    }
+</style></head>
 <body>
 <!-- loader -->
  
@@ -573,7 +584,97 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
-</body>
+
+    <!-- Certification Modal -->
+    <div class="modal-overlay" id="certModal">
+        <div class="modal-content cert-modal-content">
+            <button class="modal-close" aria-label="Close modal" id="certModalClose">
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+            <img src="" alt="Certificate" class="cert-modal-img" id="certModalImg">
+            <div class="modal-body">
+                <h3 class="modal-title" id="certModalTitle">Certificate Title</h3>
+                <p class="modal-description" id="certModalDesc">Certificate description</p>
+            </div>
+        </div>
+    </div>
+<script>
+    // Certification Modal Functionality
+    const certModal = document.getElementById('certModal');
+    const certModalImg = document.getElementById('certModalImg');
+    const certModalTitle = document.getElementById('certModalTitle');
+    const certModalDesc = document.getElementById('certModalDesc');
+    const certModalClose = document.getElementById('certModalClose');
+
+    const certifications = [
+        {
+            title: 'HTML CSS JS',
+            org: 'WEB LOUNGE / Stepik',
+            desc: 'Успешное обучение HTML, CSS, JS и разработке сайтов.',
+            img: '/sertifications/file-001.png'
+        },
+        {
+            title: 'Название Сертификата 2',
+            org: 'Организация / Платформа',
+            desc: 'Описание сертификата и полученных навыков.',
+            img: ''
+        },
+        {
+            title: 'Название Сертификата 3',
+            org: 'Организация / Платформа',
+            desc: 'Описание сертификата и полученных навыков.',
+            img: ''
+        },
+        {
+            title: 'Название Сертификата 4',
+            org: 'Организация / Платформа',
+            desc: 'Описание сертификата и полученных навыков.',
+            img: ''
+        }
+    ];
+
+    // Add click handlers to certification cards
+    document.querySelectorAll('.certification-card').forEach((card, index) => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => {
+            const cert = certifications[index];
+            if (cert) {
+                if (cert.img) {
+                    certModalImg.src = cert.img;
+                    certModalImg.style.display = 'block';
+                } else {
+                    certModalImg.style.display = 'none';
+                }
+                certModalTitle.textContent = cert.title;
+                certModalDesc.textContent = cert.desc;
+                certModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+    });
+
+    // Close modal handlers
+    certModalClose.addEventListener('click', () => {
+        certModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+
+    certModal.addEventListener('click', (e) => {
+        if (e.target === certModal) {
+            certModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && certModal.classList.contains('active')) {
+            certModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+</script></body>
 </html>
 
 
