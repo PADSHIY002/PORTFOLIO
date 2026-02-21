@@ -1367,6 +1367,12 @@ section {
     transform: scale(1.05);
 }
 
+
+.sertification-img{
+    width: 500px;
+    height: auto;
+}
+
 .certification-content {
     padding: 2rem;
     text-align: center;
