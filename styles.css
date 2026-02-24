@@ -1373,6 +1373,12 @@ section {
     height: auto;
 }
 
+
+.sertification-img2{
+    width: 250px;
+    height: auto;
+}
+
 .cert-modal-content {
         max-width: 900px;
     }
